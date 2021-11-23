@@ -27,20 +27,22 @@ class Model:
         with open('emails.txt', 'a') as file:
             file.write(self.email + '\n')
 
-class View:
-    def __init__(self):
-        self.root = Tk()
-        self.label = Label(self.root, text="Email:")
+class View(Frame):
+    def __init__(self,parent):
+        super().__init__(parent)
+
+        # self.root = Tk()
+        self.label = Label(self, text="Email:")
         self.label.grid(row=1,column=0)
 
         self.email_var = StringVar()
-        self.email_entry = Entry(self.root, textvariable=self.email_var, width=30)
+        self.email_entry = Entry(self, textvariable=self.email_var, width=30)
         self.email_entry.grid(row=1, column=1)
 
-        self.save_button = Button(self.root, text='Save', command=self.save_button_clicked)
+        self.save_button = Button(self, text='Save', command=self.save_button_clicked)
         self.save_button.grid(row=1, column=3)
 
-        self.message_label = Label(self.root, text='')
+        self.message_label = Label(self, text='')
         self.message_label.grid(row=2,column=1)
 
         self.controller = None
@@ -81,6 +83,36 @@ class View:
         """
         self.message_label['text'] = ''
 
-    def run(self):
-        self.root.mainloop()
+class Controller:
+    def __init__(self, model, view):
+        self.model = model
+        self.view = view
+    
+    def save(self, email):
+        try:
+            self.model.email = email
+            self.model.save()
 
+            self.view.show_success(f'The email {email} saved!')
+
+        except ValueError as error:
+            self.view.show_error(error)
+
+class App(Tk):
+    def __init__(self):
+        super().__init__()
+
+        self.title('MVC practise')
+
+        model = Model("hello@hello.com")
+        
+        view = View(self)
+        view.grid(row=0,column=0)
+
+        controller = Controller(model, view)
+
+        view.set_controller(controller)
+
+if __name__ == '__main__':
+    app = App()
+    app.mainloop()
