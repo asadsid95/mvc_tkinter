@@ -26,3 +26,14 @@ class Model:
     def save(self):
         with open('emails.txt', 'a') as file:
             file.write(self.email + '\n')
+
+class View:
+    def __init__(self):
+        self.root = Tk()
+        self.label = Label(self.root, text="Email:")
+        self.label.grid(row=1,column=0)
+
+    def run(self):
+        self.root.mainloop()
+
+View().run()
