@@ -2,7 +2,7 @@
 
 # Building w/ Tkinter using MVC pattern
 
-Following [tutorial] (https://www.pythontutorial.net/tkinter/tkinter-mvc/), I'll be building an email validator 
+Following [tutorial](https://www.pythontutorial.net/tkinter/tkinter-mvc/), I'll be building an email validator 
 
 Current understanding:
 - Model - data is managed here i.e. validation, storage/retrieval from databases
