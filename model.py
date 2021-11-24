@@ -22,4 +22,7 @@ class Model:
             )
         movies= self.cur.fetchall()
 
+        for movie in movies:
+            print(movie)
+
         # need to return queried result to controller which sends it to view   
