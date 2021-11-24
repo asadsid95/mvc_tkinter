@@ -12,7 +12,7 @@ class Model:
     def email(self):
         return self.__email
 
-    # setting new values to self.email 'read-only' attribute upon validation
+    # validation -> setting new values to self.email 'read-only' attribute via setter
     @email.setter
     def email (self, value):
         pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
@@ -31,7 +31,6 @@ class View(Frame):
     def __init__(self,parent):
         super().__init__(parent)
 
-        # self.root = Tk()
         self.label = Label(self, text="Email:")
         self.label.grid(row=1,column=0)
 
