@@ -7,11 +7,13 @@ class App(Tk):
     def __init__(self):
         super().__init__()
     
+        self.title("Practise MVC")
+        
         ui_model = Model('Dark')
         ui_view = view.View(self)
         ui_view.grid(row=0,column=0)
-
         controller = Controller(ui_model, ui_view)
+        
         ui_view.set_controller(controller)
 
 

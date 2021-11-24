@@ -19,13 +19,14 @@ class View(Frame):
         self.submit_title.grid(row=3, column=0, columnspan=4, padx=10, pady=10,ipadx=100)
 
         self.controller = None
-
+    
     # To add: required input based formatting (error? show red ; success? return msg)
 
     # assigning value to controller of Controller object
     def set_controller(self,controller):
         self.controller = controller
 
+    # send user input to controller object
     def submit(self):
         # get value from each Entry
         self.controller.save(self.name_entry.get())
