@@ -16,7 +16,7 @@ class Model:
             ON m.genre_id = g._id
             WHERE title LIKE :part_title
             ORDER BY popularity DESC
-            LIMIT 5;""", 
+            LIMIT 1;""", 
             {
                 'part_title': input_title
             }
@@ -34,8 +34,8 @@ class Model:
             JOIN genres g 
             ON m.genre_id= g._id
             WHERE release_date < :search_date
-            ORDER BY release_date DESC;
-            """,
+            ORDER BY release_date DESC
+            LIMIT 1;""",
             {
                 "search_date": input_date
             }
