@@ -1,4 +1,6 @@
 from tkinter import *
+from PIL import ImageTk, Image
+from urllib import request
 
 class View(Frame):
     def __init__(self, parent):
@@ -37,11 +39,19 @@ class View(Frame):
 
     # create functionality for incoming data from DB
     def receiving(self,movies):
-        result=''
+        self.result=''
+        self.image=None
         for movie in movies:
-            result += str(movie[0]) + "\t" + str(movie[1]) + "\t" + str(movie[2]) +  "\t" + str(movie[3]) +  "\t"  + str(movie[4]) + "\n"
- 
-        movie_info = Label(self, text=result)
-        movie_info.grid(row=4,column=0, columnspan=3)  
+            self.result = str(movie[0]) + "\t" + str(movie[1]) + "\t" + str(movie[2]) +  "\t" + str(movie[3]) +  "\t"  + str(movie[4]) + "\n"
+            self.image = ImageTk.PhotoImage(Image.open(request.urlopen(movie[4])))
+            self.movie_info = Label(self, text=self.result)
+            self.movie_info.grid(row=4,column=0, columnspan=3, padx=80, pady=80)  
+            self.movie_poster = Label(self, image=self.image)
+            self.movie_poster.grid(row=4,column=1, columnspan=3)
+
+
+
+        # movie_info = Label(self, text=result, image=image)
+        # movie_info.grid(row=4,column=0, columnspan=3)  
 
         # pass

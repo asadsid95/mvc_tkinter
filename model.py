@@ -10,7 +10,7 @@ class Model:
 
     def title_search(self):
         input_title = "%"+self.title+"%"
-        self.cur.execute("""SELECT title, language, popularity, genre, 'https://image.tmdb.org/t/p/w500' || movie_poster 
+        self.cur.execute("""SELECT title, language, popularity, genre, 'https://image.tmdb.org/t/p/w500' || movie_poster as movie_poster 
             FROM movies m
             JOIN genres g
             ON m.genre_id = g._id
