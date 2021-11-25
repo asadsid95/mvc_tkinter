@@ -30,3 +30,6 @@ class View(Frame):
     def submit(self):
         # get value from each Entry
         self.controller.save(self.name_entry.get())
+
+    # create functionality for incoming data from DB
+    
