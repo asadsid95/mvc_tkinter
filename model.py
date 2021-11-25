@@ -10,7 +10,7 @@ class Model:
 
     def title_search(self):
         input_title = "%"+self.title+"%"
-        self.cur.execute("""SELECT title, language, popularity, genre 
+        self.cur.execute("""SELECT title, language, popularity, genre, 'https://image.tmdb.org/t/p/w500' || movie_poster 
             FROM movies m
             JOIN genres g
             ON m.genre_id = g._id
@@ -28,7 +28,8 @@ class Model:
 
     def date_search(self):
         input_date = self.date
-        self.cur.execute("""SELECT title, release_date, popularity, genre
+        self.cur.execute("""SELECT title, release_date, popularity, genre, 'https://image.tmdb.org/t/p/w500' || movie_poster 
+            FROM movies m
             FROM movies m 
             JOIN genres g 
             ON m.genre_id= g._id

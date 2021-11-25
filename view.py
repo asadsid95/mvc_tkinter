@@ -39,7 +39,7 @@ class View(Frame):
     def receiving(self,movies):
         result=''
         for movie in movies:
-            result += str(movie[0]) + "\t" + str(movie[1]) + "\t" + str(movie[2]) +  "\t" + str(movie[3]) + "\n"
+            result += str(movie[0]) + "\t" + str(movie[1]) + "\t" + str(movie[2]) +  "\t" + str(movie[3]) +  "\t"  + str(movie[4]) + "\n"
  
         movie_info = Label(self, text=result)
         movie_info.grid(row=4,column=0, columnspan=3)  
