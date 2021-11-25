@@ -29,7 +29,19 @@ class View(Frame):
     # send user input to controller object
     def submit(self):
         # get value from each Entry
-        self.controller.save(self.name_entry.get())
+        if self.name_entry.get() == '':
+            self.controller.save(None, self.date_entry.get())
+        elif self.date_entry.get() == '':
+            self.controller.save(self.name_entry.get(), None)
+
 
     # create functionality for incoming data from DB
-    
+    def receiving(self,movies):
+        result=''
+        for movie in movies:
+            result += str(movie[0]) + "\t" + str(movie[1]) + "\t" + str(movie[2]) +  "\t" + str(movie[3]) + "\n"
+ 
+        movie_info = Label(self, text=result)
+        movie_info.grid(row=4,column=0, columnspan=3)  
+
+        # pass
