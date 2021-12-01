@@ -50,7 +50,7 @@ class View(Frame):
             self.movie_info.grid(row=4,column=0, columnspan=2, padx=80, pady=80)  
             
             self.movie_poster = Label(self, image=self.image)
-            self.movie_poster.grid(row=4,column=1, columnspan=2, padx=80, pady=80)
+            self.movie_poster.grid(row=4,column=2, columnspan=2, padx=80, pady=80)
 
         # movie_info = Label(self, text=result, image=image)
         # movie_info.grid(row=4,column=0, columnspan=3)  
