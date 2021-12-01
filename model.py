@@ -15,8 +15,7 @@ class Model:
             JOIN genres g
             ON m.genre_id = g._id
             WHERE title LIKE :part_title
-            ORDER BY popularity DESC
-            LIMIT 1;""", 
+            ORDER BY popularity DESC;""", 
             {
                 'part_title': input_title
             }
@@ -30,12 +29,10 @@ class Model:
         input_date = self.date
         self.cur.execute("""SELECT title, release_date, popularity, genre, 'https://image.tmdb.org/t/p/w500' || movie_poster 
             FROM movies m
-            FROM movies m 
             JOIN genres g 
             ON m.genre_id= g._id
             WHERE release_date < :search_date
-            ORDER BY release_date DESC
-            LIMIT 1;""",
+            ORDER BY release_date DESC;""",
             {
                 "search_date": input_date
             }
