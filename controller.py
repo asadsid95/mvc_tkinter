@@ -8,12 +8,12 @@ class Controller:
         self.model.date = date
 
         if self.model.title == None:
-            movies_result_date = self.model.date_search()
-            self.view.receiving(movies_result_date)  
+            date_input = self.model.date_search()
+            self.view.receiving(date_input)  
 
         elif self.model.date == None:
-            movies_result_title = self.model.title_search()
-            self.view.receiving(movies_result_title)
+            title_input = self.model.title_search()
+            self.view.receiving(title_input)
 
 
     # def send_back(self, movies):

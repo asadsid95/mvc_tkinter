@@ -6,7 +6,7 @@ class View(Frame):
     def __init__(self, parent):
         super().__init__(parent) 
 
-        self.welcome = Label(self,text="Welcome to Movie Library").grid(row=0,column=0, columnspan=4)
+        self.welcome = Label(self,text="Welcome to Movie Library").grid(row=0,column=0, columnspan=2)
 
         # input
         self.name_label = Label(self,text="Enter Movie name", padx=10, pady=10).grid(row=1,column=0, columnspan=1)
@@ -18,7 +18,7 @@ class View(Frame):
         self.date_entry.grid(row=2,column=1, padx=10)
 
         self.submit_title = Button(self, text="Submit Title", command=self.submit)
-        self.submit_title.grid(row=3, column=0, columnspan=2, padx=10, pady=10,ipadx=100)
+        self.submit_title.grid(row=3, column=0, columnspan=2, padx=10, pady=10,ipadx=50)
 
         self.controller = None
     
@@ -33,26 +33,25 @@ class View(Frame):
         # get value from each Entry
         if self.name_entry.get() == '':
             self.controller.save(None, self.date_entry.get())
+            self.date_entry.delete(0,END)
         elif self.date_entry.get() == '':
             self.controller.save(self.name_entry.get(), None)
+            self.name_entry.delete(0,END)
 
 
-    # create functionality for incoming data from DB
+    # functionality for incoming data from DB
     def receiving(self,movies):
         self.result=''
 
-        self.image=None
+        self.image=[]
         for movie in movies:
             self.result = str(movie[0]) + "\t" + str(movie[1]) + "\t" + str(movie[2]) +  "\t" + str(movie[3]) + "\n"
-            self.image = ImageTk.PhotoImage(Image.open(request.urlopen(movie[4])).resize((200,150)))
-            
-            self.movie_info = Label(self, text=self.result, width=100)
-            self.movie_info.grid(row=4,column=0, columnspan=2, padx=80, pady=80)  
-            
-            self.movie_poster = Label(self, image=self.image)
-            self.movie_poster.grid(row=4,column=2, columnspan=2, padx=80, pady=80)
+            self.image.append(ImageTk.PhotoImage(Image.open(request.urlopen(movie[4])).resize((200,250))))
+        
+        print(self.image)
+        # self.movie_info = Label(self, text=self.result, width=50)
+        # self.movie_info.grid(row=4,column=0, columnspan=1)  
+        
+        # self.movie_poster = Label(self, image=self.image)
+        # self.movie_poster.grid(row=4,column=1, columnspan=1, padx=10, pady=10)
 
-        # movie_info = Label(self, text=result, image=image)
-        # movie_info.grid(row=4,column=0, columnspan=3)  
-
-        # pass
