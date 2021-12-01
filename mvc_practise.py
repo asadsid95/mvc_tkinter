@@ -1,18 +1,15 @@
 # Practising creating movie library with MVC pattern b/c I don't understand how data flow is happening
 from tkinter import *
-
-
-
-
+import sqlite3
 
 # If we want to do something with the input data from View, we have to pass it to model via controller
 class Controller:
-    def __init__(self, model, view):
-        self.model = model
+    def __init__(self,view, model):
+        # self.model = model
         self.view = view
     
     def passToModel(self):
-        print(self.model)
+        print(self.name_label)
     pass
 
 class View:
@@ -30,13 +27,17 @@ class View:
         mainloop()
 
     def submit(self):
-        print(self.name_entry.get())
-        new_cont = Controller(self.name_entry.get(), self.date_entry.get()).passToModel()
+        new_cont = Controller(self).passToModel()
         print(new_cont)
-    pass
-View()
+
+View().submit()
+
 class Model:
-    pass
+    def __init__(self, title, date=None):
+        self.title = title
+        self.date = date
+        self.conn = sqlite3.connect("movie-library.db")
+        self.cur = self.conn.cursor()
 
 class App:
 
