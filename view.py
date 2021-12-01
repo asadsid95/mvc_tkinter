@@ -44,14 +44,22 @@ class View(Frame):
         self.result=''
 
         self.image=[]
+        canvas = Canvas(self, width=250, height=550, bg='white')
+        canvas.grid(row=4, column=1)
+
         for movie in movies:
-            self.result = str(movie[0]) + "\t" + str(movie[1]) + "\t" + str(movie[2]) +  "\t" + str(movie[3]) + "\n"
+            self.result += str(movie[0]) + "\t" + str(movie[1]) + "\t" + str(movie[2]) +  "\t" + str(movie[3]) + "\n"
             self.image.append(ImageTk.PhotoImage(Image.open(request.urlopen(movie[4])).resize((200,250))))
+            
+        self.movie_info = Label(self, text=self.result, width=50)
+        self.movie_info.grid(row=4,column=0, columnspan=1)  
+
+        # for image in self.image:
+        canvas.create_image(150,150, image=self.image[0])
+        canvas.create_image(150,250, image=self.image[1])
+
         
-        print(self.image)
-        # self.movie_info = Label(self, text=self.result, width=50)
-        # self.movie_info.grid(row=4,column=0, columnspan=1)  
-        
-        # self.movie_poster = Label(self, image=self.image)
-        # self.movie_poster.grid(row=4,column=1, columnspan=1, padx=10, pady=10)
+        # for image in self.image:
+            # self.movie_poster.pack()
+            # self.movie_poster.grid(row=4,column=1, columnspan=1, padx=10, pady=10)
 
