@@ -35,7 +35,7 @@ class Model:
             ON m.genre_id= g._id
             WHERE release_date < :search_date
             ORDER BY release_date DESC
-            LIMIT 1;R""",
+            LIMIT 1;""",
             {
                 "search_date": input_date
             }
