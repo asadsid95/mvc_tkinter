@@ -65,12 +65,12 @@ class View(Frame):
         i=0
         for image in self.image:
             canvas_c = Canvas(canvas_p, width=200, height=550, bg='light green')
-            canvas_c.create_image(200,550, image=image, anchor='ne')
+            canvas_c.create_image(300,0, image=image, anchor='ne')
             canvas_p.create_window(0, 100*i,window=canvas_c)
             i +=1
 
-        # sb_vertical = Scrollbar(self, orient=VERTICAL)
-        # sb_vertical.grid(row=0, column=2)
-        # # sb_vertical.pack(side=RIGHT, fill=Y)
+        sb_vertical = Scrollbar(self, orient=VERTICAL)
+        sb_vertical.grid(row=0, column=2)
+        # sb_vertical.pack(side=RIGHT, fill=Y)
         # canvas_p.config(width=250,height=550*num_images, yscrollcommand=sb_vertical.set, scrollregion=canvas_p.bbox(ALL))
         # sb_vertical.config(canvas_p.yview)
