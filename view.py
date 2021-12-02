@@ -17,8 +17,11 @@ class View(Frame):
         self.date_entry = Entry(self,width=35)
         self.date_entry.grid(row=2,column=1, padx=10)
 
-        self.submit_title = Button(self, text="Submit Title", command=self.submit)
-        self.submit_title.grid(row=3, column=0, columnspan=2, padx=10, pady=10,ipadx=50)
+        self.submit_button = Button(self, text="Submit", command=self.submit)
+        self.submit_button.grid(row=3, column=0, columnspan=2, padx=10, pady=10,ipadx=50)
+        
+        self.reset_button = Button(self, text="Reset View", command=self.reset)
+        self.reset_button.grid(row=4, column=0, columnspan=2, padx=10, pady=10,ipadx=50)
 
         self.controller = None
     
@@ -38,28 +41,36 @@ class View(Frame):
             self.controller.save(self.name_entry.get(), None)
             self.name_entry.delete(0,END)
 
+    def reset(self):
+        self.destroy()
+        pass
 
-    # functionality for incoming data from DB
+    # displaying movie info functionality for incoming data from DB
     def receiving(self,movies):
+ 
         self.result=''
-
         self.image=[]
-        canvas = Canvas(self, width=250, height=550, bg='white')
-        canvas.grid(row=4, column=1)
 
         for movie in movies:
             self.result += str(movie[0]) + "\t" + str(movie[1]) + "\t" + str(movie[2]) +  "\t" + str(movie[3]) + "\n"
             self.image.append(ImageTk.PhotoImage(Image.open(request.urlopen(movie[4])).resize((200,250))))
+ 
+        num_images = len(self.image)
+        canvas_p = Canvas(self, width=250, height=550, bg='light gray')
+        canvas_p.grid(row=4, column=1)
             
         self.movie_info = Label(self, text=self.result, width=50)
-        self.movie_info.grid(row=4,column=0, columnspan=1)  
+        self.movie_info.grid(row=5,column=0, columnspan=1)  
 
-        # for image in self.image:
-        canvas.create_image(150,150, image=self.image[0])
-        canvas.create_image(150,250, image=self.image[1])
+        i=0
+        for image in self.image:
+            canvas_c = Canvas(canvas_p, width=200, height=550, bg='light green')
+            canvas_c.create_image(200,550, image=image, anchor='ne')
+            canvas_p.create_window(0, 100*i,window=canvas_c)
+            i +=1
 
-        
-        # for image in self.image:
-            # self.movie_poster.pack()
-            # self.movie_poster.grid(row=4,column=1, columnspan=1, padx=10, pady=10)
-
+        # sb_vertical = Scrollbar(self, orient=VERTICAL)
+        # sb_vertical.grid(row=0, column=2)
+        # # sb_vertical.pack(side=RIGHT, fill=Y)
+        # canvas_p.config(width=250,height=550*num_images, yscrollcommand=sb_vertical.set, scrollregion=canvas_p.bbox(ALL))
+        # sb_vertical.config(canvas_p.yview)
