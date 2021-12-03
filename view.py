@@ -37,12 +37,12 @@ class View(Frame):
         # get value from each Entry
         if self.name_entry.get() == '':
             self.controller.save(None, self.date_entry.get())
+            self.date_entry.delete(0,END)
         elif self.date_entry.get() == '':
             self.controller.save(self.name_entry.get(), None)
+            self.name_entry.delete(0,END)
             # self.name_entry.delete(0,END)
 
-            self.date_entry.delete(0,END)
-            self.name_entry.delete(0,END)
 
 
     def reset(self):
@@ -59,25 +59,31 @@ class View(Frame):
             self.result += str(movie[0]) + "\t" + str(movie[1]) + "\t" + str(movie[2]) +  "\t" + str(movie[3]) + "\n"
             self.image.append(ImageTk.PhotoImage(Image.open(request.urlopen(movie[4])).resize((200,250))))
  
+        # parent canvas
         num_images = len(self.image)
         canvas_p = Canvas(self, width=200, height=250*num_images, bg='light blue')
-        canvas_p.grid(row=4, column=1,columnspan= 1)
-        canvas_p.create_image(2,2,image=self.image[0], anchor=NW)
+        canvas_p.grid(row=4, column=1)
 
-        canvas_c = Canvas(canvas_p, width=50, height=50, bg='dark blue')
-        canvas_c.grid(row=4, column=1,columnspan= 1)
-        canvas_c.create_image(2,2,image=self.image[8], anchor=NW)
-        canvas_p.create_window(0, 0,window=canvas_c)
+        # child canvasses
+        canvas_c = Canvas(canvas_p, width=200, height=750, bg='dark blue')
+        canvas_c.create_image(2,2,image=self.image[0], anchor=NW)
+        canvas_c.grid(row=0, column=0)
+        canvas_c.create_image(102,252,image=self.image[1], anchor=NW)
+        canvas_c.grid(row=1, column=0)
+        # canvas_c.create_image(2,2,image=self.image[1], anchor=NW)
+        # canvas_p.create_window(100, 375,window=canvas_c)
 
-            
-        self.movie_info = Label(self, text=self.result, width=50)
+        # canvas_p.create_window(0, 0,window=canvas_c)
+
+        # self.movie_info = Label(self, text=self.result, width=50)
         # self.movie_info.grid(row=5,column=0, columnspan=1)  
 
         # i=0
         # for image in self.image:
         #     canvas_c = Canvas(canvas_p, width=200, height=250, bg='light green')
-        #     canvas_c.create_image(250,0, image=image)
-        #     canvas_p.create_window(0, 250*i,window=canvas_c)
+        #     canvas_c.create_image(2,2, image=image)
+        #     canvas_p.grid(row=1, column=1)
+        #     canvas_p.create_window(100, 375*i,window=canvas_c)
         #     i +=1
 
         # sb_vertical = Scrollbar(self, orient=VERTICAL)
