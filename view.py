@@ -37,10 +37,10 @@ class View(Frame):
         # get value from each Entry
         if self.name_entry.get() == '':
             self.controller.save(None, self.date_entry.get())
-            self.date_entry.delete(0,END)
+            # self.date_entry.delete(0,END)
         elif self.date_entry.get() == '':
             self.controller.save(self.name_entry.get(), None)
-            self.name_entry.delete(0,END)
+            # self.name_entry.delete(0,END)
             # self.name_entry.delete(0,END)
 
     def reset(self):
