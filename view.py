@@ -77,35 +77,13 @@ class View(Frame):
             canvas_p.create_window(100, 250 * i, window=canvas_c)
             i += 1
 
-        canvas_p.grid(row=4, column=0, columnspan=2)
-
-            # canvas_c = Canvas(canvas_p, width=200, height=250*num_images, bg='dark blue')
-            # canvas_c.create_image(2, 2+(250*i), image=image, anchor=NW)
-            # canvas_c.grid(row=0, column=0)
-            # i += 1
-        # canvas_c.create_image(2,252,image=self.image[1], anchor=NW)
-        # canvas_c.grid(row=1, column=0)
-
-        # canvas_c.create_image(2,502,image=self.image[2], anchor=NW)
-        # canvas_c.grid(row=1, column=0)
-
-        # canvas_p.create_window(100, 375,window=canvas_c)
-
-        # canvas_p.create_window(0, 0,window=canvas_c)
+        canvas_p.grid(row=4, column=1)
 
         # self.movie_info = Label(self, text=self.result, width=50)
         # self.movie_info.grid(row=5,column=0, columnspan=1)  
 
-        # i=0
-        # for image in self.image:
-        #     canvas_c = Canvas(canvas_p, width=200, height=250, bg='light green')
-        #     canvas_c.create_image(2,2, image=image)
-        #     canvas_p.grid(row=1, column=1)
-        #     canvas_p.create_window(100, 375*i,window=canvas_c)
-        #     i +=1
-
-        # sb_vertical = Scrollbar(self, orient=VERTICAL)
-        # sb_vertical.grid(row=0, column=2, sticky='w')
+        sb_vertical = Scrollbar(self, orient=VERTICAL)
+        sb_vertical.grid(row=0, column=2, sticky='w')
         # sb_vertical.pack(side=RIGHT, fill=Y)
         # canvas_p.config(width=250,height=550*num_images, yscrollcommand=sb_vertical.set, scrollregion=canvas_p.bbox(ALL))
         # sb_vertical.config(canvas_p.yview)
