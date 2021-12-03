@@ -59,17 +59,9 @@ class View(Frame):
  
         # parent canvas
         num_images = len(self.image)
-        # canvas_p = Canvas(self, width=200, height=250*num_images, bg='light blue')
-        # canvas_p.grid(row=4, column=0, columnspan=2)
-
-        # frame_canvas_p = Frame(canvas_p,width = 250, height = 2700, bg= 'black')
-        # frame_canvas_p.grid(row=0, column=0)
-
         canvas_p = Canvas(self, width=200, height=250*num_images, bg='light blue')
 
-        # child canvasses
-        # canvas_c = Canvas(frame_canvas_p, width=200, height=250*num_images, bg='dark blue')
-
+        # child canvasse
         i=0
         for image in self.image:
             canvas_c = Canvas(canvas_p, width=200, height=250, bg='dark blue')
@@ -79,8 +71,8 @@ class View(Frame):
 
         canvas_p.grid(row=4, column=1)
 
-        # self.movie_info = Label(self, text=self.result, width=50)
-        # self.movie_info.grid(row=5,column=0, columnspan=1)  
+        self.movie_info = Label(self, text=self.result, width=50)
+        self.movie_info.grid(row=4,column=0, columnspan=1)  
 
         sb_vertical = Scrollbar(self, orient=VERTICAL)
         sb_vertical.grid(row=0, column=2, sticky='w')
