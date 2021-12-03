@@ -59,19 +59,36 @@ class View(Frame):
  
         # parent canvas
         num_images = len(self.image)
+        # canvas_p = Canvas(self, width=200, height=250*num_images, bg='light blue')
+        # canvas_p.grid(row=4, column=0, columnspan=2)
+
+        # frame_canvas_p = Frame(canvas_p,width = 250, height = 2700, bg= 'black')
+        # frame_canvas_p.grid(row=0, column=0)
+
         canvas_p = Canvas(self, width=200, height=250*num_images, bg='light blue')
-        canvas_p.grid(row=4, column=0, columnspan=2)
 
         # child canvasses
-        canvas_c = Canvas(canvas_p, width=200, height=250*num_images, bg='dark blue')
-        canvas_c.create_image(2,2,image=self.image[0], anchor=NW)
-        canvas_c.grid(row=0, column=0)
+        # canvas_c = Canvas(frame_canvas_p, width=200, height=250*num_images, bg='dark blue')
 
-        canvas_c.create_image(2,252,image=self.image[1], anchor=NW)
-        canvas_c.grid(row=1, column=0)
+        i=0
+        for image in self.image:
+            canvas_c = Canvas(canvas_p, width=200, height=250, bg='dark blue')
+            canvas_c.create_image(2, 2, image=image, anchor=NW)
+            canvas_p.create_window(100, 250 * i, window=canvas_c)
+            i += 1
 
-        canvas_c.create_image(2,502,image=self.image[2], anchor=NW)
-        canvas_c.grid(row=1, column=0)
+        canvas_p.grid(row=4, column=0, columnspan=2)
+
+            # canvas_c = Canvas(canvas_p, width=200, height=250*num_images, bg='dark blue')
+            # canvas_c.create_image(2, 2+(250*i), image=image, anchor=NW)
+            # canvas_c.grid(row=0, column=0)
+            # i += 1
+        # canvas_c.create_image(2,252,image=self.image[1], anchor=NW)
+        # canvas_c.grid(row=1, column=0)
+
+        # canvas_c.create_image(2,502,image=self.image[2], anchor=NW)
+        # canvas_c.grid(row=1, column=0)
+
         # canvas_p.create_window(100, 375,window=canvas_c)
 
         # canvas_p.create_window(0, 0,window=canvas_c)
