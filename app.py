@@ -1,5 +1,6 @@
 from tkinter import *
-import view 
+# import view 
+import view2
 from model import *
 from controller import * 
 
@@ -10,7 +11,8 @@ class App(Tk):
         self.title("Practise MVC")
         
         ui_model = Model('','')
-        ui_view = view.View(self)
+        # ui_view = view.View(self)
+        ui_view = view2.View(self)
         ui_view.grid(row=0,column=0)
         controller = Controller(ui_model, ui_view)
         
