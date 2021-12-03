@@ -43,8 +43,6 @@ class View(Frame):
             self.name_entry.delete(0,END)
             # self.name_entry.delete(0,END)
 
-
-
     def reset(self):
         self.destroy()
         pass
@@ -62,15 +60,18 @@ class View(Frame):
         # parent canvas
         num_images = len(self.image)
         canvas_p = Canvas(self, width=200, height=250*num_images, bg='light blue')
-        canvas_p.grid(row=4, column=1)
+        canvas_p.grid(row=4, column=0, columnspan=2)
 
         # child canvasses
-        canvas_c = Canvas(canvas_p, width=200, height=750, bg='dark blue')
+        canvas_c = Canvas(canvas_p, width=200, height=250*num_images, bg='dark blue')
         canvas_c.create_image(2,2,image=self.image[0], anchor=NW)
         canvas_c.grid(row=0, column=0)
-        canvas_c.create_image(102,252,image=self.image[1], anchor=NW)
+
+        canvas_c.create_image(2,252,image=self.image[1], anchor=NW)
         canvas_c.grid(row=1, column=0)
-        # canvas_c.create_image(2,2,image=self.image[1], anchor=NW)
+
+        canvas_c.create_image(2,502,image=self.image[2], anchor=NW)
+        canvas_c.grid(row=1, column=0)
         # canvas_p.create_window(100, 375,window=canvas_c)
 
         # canvas_p.create_window(0, 0,window=canvas_c)
