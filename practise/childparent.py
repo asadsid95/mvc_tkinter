@@ -15,6 +15,9 @@ class Work(Vehicle):
 class Personal(Vehicle):
     pass
 
+print('This is vehicle class: ', Vehicle(4, 2.5))
+print('This is vehicle''s wheels: ', Vehicle(4, 2.5).wheels ) 
+
 car1 = Work(4, 3.5, True)
 print('Work vehicle''s wheels:', car1.wheels)
 
