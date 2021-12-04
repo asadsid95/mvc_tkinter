@@ -4,20 +4,28 @@ import view2
 from model import *
 from controller import * 
 
-class App(tk.Tk):
-    def __init__(self):
-        super().__init__()
-    
-        self.title("Practise MVC")
+class MainApp(tk.Frame):
+    def __init__(self,parent): # parent refers to root being passed as attribute to MainApp (@ the bottom)
+        # super().__init__()
+        tk.Frame.__init__(self,parent) # here we call 
+        self.parent=parent
+        self.parent.title('This is after Tk() passed as attribute to App()')
+        self.parent['bg'] = 'blue'
         
-        ui_model = Model('','')
+        test_label = tk.Label(self, text = 'test').grid(row=0,column=0)
+
+        # self.columnconfigure(0,weight=1)
+        # self.rowconfigure(0,weight=1)
+        
+        # ui_model = Model('','')
         # ui_view = view.View(self)
-        ui_view = view2.View(self)
-        ui_view.grid(row=0,column=0)
-        controller = Controller(ui_model, ui_view)
+        # ui_view = view2.View(self)
+        # ui_view.grid(row=0,column=0)
+        # controller = Controller(ui_model, ui_view)
         
-        ui_view.set_controller(controller)
+        # ui_view.set_controller(controller)
 
 if __name__=="__main__":
-    app = App()
-    app.mainloop()
+    root = tk.Tk()
+    MainApp(root).pack(side='top', fill='y')
+    root.mainloop()
