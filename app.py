@@ -1,10 +1,10 @@
-from tkinter import *
+import tkinter as tk
 # import view 
 import view2
 from model import *
 from controller import * 
 
-class App(Tk):
+class App(tk.Tk):
     def __init__(self):
         super().__init__()
     
