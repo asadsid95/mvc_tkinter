@@ -4,12 +4,13 @@ import view2
 from model import *
 from controller import * 
 
-class MainApp(tk.Tk):
+class MainApp(tk.Tk): # subclass of toplevel widget
     def __init__(self):
         tk.Tk.__init__(self)
         # self.toplevel = toplevel
         self.title("This is from app.py") 
-        self.ui_view = view2.View()
+        
+        view1 = view2.View(self)
 
     pass
 
