@@ -10,8 +10,8 @@ class MainApp(tk.Tk): # subclass of toplevel widget
         # self.toplevel = toplevel
         self.title("This is from app.py") 
         
-        print(view2.View(self).winfo_parent()) # This returns root window (i.e. '.' )
-
+        # print(view2.View(self).winfo_parent()) # This returns root window (i.e. '.' )
+        view2.View(self)
     pass
 
 if __name__=="__main__":

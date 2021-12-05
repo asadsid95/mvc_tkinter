@@ -1,11 +1,33 @@
 import tkinter as tk
-from tkinter.constants import NS, VERTICAL
+from tkinter.constants import BOTH, COMMAND, LEFT, NS, RIGHT, VERTICAL, Y
 
 class View(tk.Frame):
     def __init__(self,parent):
         tk.Frame.__init__(self, parent)
         self.parent = parent
-        print(self.winfo_parent()) # This returns root window (i.e. '.' )
+        # print(self.winfo_parent()) # This returns root window (i.e. '.' )
+        # print(self.parent.winfo_parent()) # This also returns root window (i.e. blank )
+
+        # Now that I know its been root window that has been created, now I'll first create a Frame
+        self.main_frame = tk.Frame(self.parent)
+        self.main_frame.pack(fill=BOTH, expand=1)
+        # print(self.main_frame.winfo_parent())
+
+        # Create a Canvas in main_frame
+        self.my_canvas = tk.Canvas(self.main_frame)
+        self.my_canvas.pack(side=LEFT, fill=BOTH, expand=1)
+        # print(self.my_canvas.winfo_parent()) # This returns .!view.!frame
+
+        # Lets create scrollbar on my_canvas
+        self.my_scrollbar = tk.Scrollbar(self.my_canvas,orient=VERTICAL, command=self.my_canvas.yview)
+        self.my_scrollbar.pack(side=RIGHT, fill=Y)
+
+        # Configure the canvas
+        self.my_canvas.config(yscrollcommand=self.my_scrollbar)
+        self.my_canvas.bind('<Configure>', lambda e: self.my_canvas.configure(scrollregion=self.my_canvas.bbox('all')))
+
+        # Creating another Frame inside the canvas
+        self.second_frame = tk.Frame(self.my_canvas)
 
         # self.canvas_on_View_frame = tk.Canvas(self) # I assume self is referring to View Object which inherits Frame
         # self.frame_in_canvas = tk.Frame(self.canvas_on_View_frame)#.grid(row=0,column=0) 
