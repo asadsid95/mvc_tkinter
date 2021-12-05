@@ -1,10 +1,9 @@
-from tkinter import Frame, Button, Label, Entry
+import tkinter as tk
 
-class View(Frame):
-    def __init__(self, root):
-        super().__init__(root)
-    
-        frame_p = Frame(root, bg='light blue').grid(row=0,column=0, sticky='NWES')
+class View:
+    def __init__(self):
+        # self.root = root
+        frame_p = tk.Frame(self, bg='light blue', width=500, height=500).grid(row=0,column=0, sticky='NWES')
         # frame_test = Frame(parent, bg='light green',width=500, height=500).grid(row=1,column=0)
 
         # self.welcome = Label(frame_p,text="Welcome to Movie Library").grid(row=0,column=0, columnspan=1)
