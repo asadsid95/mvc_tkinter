@@ -50,6 +50,8 @@ class View(tk.Frame):
        
         self.controller = None
 
+        
+
         # for i in range(100):
         #     tk.Button(self.second_frame, text=f'Button {i}!').grid(row=i, column=0)
 
@@ -74,6 +76,7 @@ class View(tk.Frame):
         print('Resetted!')
 
     def receiving(self,movies):
-        for movie in movies:
-            print(movie)
+
+        for row in range(len(movies)):
+            tk.Label(self.second_frame, text=movies[row][0]).grid(row=row, column=1)
         pass
