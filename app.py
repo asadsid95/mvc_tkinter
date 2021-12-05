@@ -10,7 +10,7 @@ class MainApp(tk.Tk): # subclass of toplevel widget
         # self.toplevel = toplevel
         self.title("This is from app.py") 
         
-        view1 = view2.View(self)
+        print(view2.View(self).winfo_parent()) # This returns root window (i.e. '.' )
 
     pass
 
