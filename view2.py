@@ -48,14 +48,10 @@ class View(tk.Frame):
         self.reset_button = tk.Button(self.second_frame, text="Reset View", command=self.reset)
         self.reset_button.grid(row=4, column=0, columnspan=2, padx=10, pady=10,ipadx=50)        
        
+        self.controller = None
+
         # for i in range(100):
         #     tk.Button(self.second_frame, text=f'Button {i}!').grid(row=i, column=0)
-
-
-        
-        # self.canvas_on_View_frame = tk.Canvas(self) # I assume self is referring to View Object which inherits Frame
-        # self.frame_in_canvas = tk.Frame(self.canvas_on_View_frame)#.grid(row=0,column=0) 
-        # self.scroll = tk.Scrollbar(self.canvas_on_View_frame, orient=VERTICAL, command=self.canvas_on_View_frame.yview)
 
 
         # self.canvas_on_View_frame.config(yscrollcommand= self.scroll.set)
@@ -63,13 +59,21 @@ class View(tk.Frame):
         # self.scroll.grid(row=0,column=1, sticky=NS) # .grid(row=0,column=2)
         # self.canvas_on_View_frame.create_window(2,2, window=self.frame_in_canvas, anchor='nw')
 
+    def set_controller(self,controller):
+        self.controller = controller
 
     def submit(self):
-        print('Submitted!')
+        # get value from each Entry
+        if self.name_entry.get() == '':
+            self.controller.save(None, self.date_entry.get())
+            # self.date_entry.delete(0,END)
+        elif self.date_entry.get() == '':
+            self.controller.save(self.name_entry.get(), None)
 
     def reset(self):
         print('Resetted!')
 
-    def set_controller(self,controller):
-        print('hello')
-    pass
+    def receiving(self,movies):
+        for movie in movies:
+            print(movie)
+        pass

@@ -12,9 +12,11 @@ class MainApp(tk.Tk): # subclass of toplevel widget
         self.geometry("500x400")
         
         # print(view2.View(self).winfo_parent()) # This returns root window (i.e. '.' )
-        view2.View(self)
+        ui_view = view2.View(self)
+        ui_model = Model('','')
+        controller = Controller(ui_model,ui_view)
+        ui_view.set_controller(controller)
 
-        
 
     pass
 
