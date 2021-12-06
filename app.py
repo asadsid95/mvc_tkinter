@@ -9,7 +9,7 @@ class MainApp(tk.Tk): # subclass of toplevel widget
         tk.Tk.__init__(self)
         # self.toplevel = toplevel
         self.title("This is from app.py") 
-        self.geometry("500x400")
+        self.geometry("1000x1000")
         
         # print(view2.View(self).winfo_parent()) # This returns root window (i.e. '.' )
         ui_view = view2.View(self)

@@ -1,5 +1,7 @@
 import tkinter as tk
-from tkinter.constants import BOTH, COMMAND, LEFT, NS, NW, RIGHT, VERTICAL, Y
+from tkinter.constants import BOTH, COMMAND, LEFT, NS, NW, RIGHT, TOP, VERTICAL, Y
+from PIL import ImageTk, Image
+from urllib import request
 
 class View(tk.Frame):
     def __init__(self,parent):
@@ -26,10 +28,10 @@ class View(tk.Frame):
         self.my_canvas.configure(yscrollcommand=self.my_scrollbar)
         self.my_canvas.bind('<Configure>', lambda e: self.my_canvas.configure(scrollregion=self.my_canvas.bbox('all')))
 
-        # Creating another Frame inside the canvas
+        # Creating first Frame inside the canvas. First frame inside the canvas but second frame in total
         self.second_frame = tk.Frame(self.my_canvas)
 
-        # Adding second frame to a window in the canvas
+        # Adding first frame to a window in the canvas
         self.my_canvas.create_window((0,0), window=self.second_frame, anchor=NW)
 
         self.welcome = tk.Label(self.second_frame,text="Welcome to Movie Library").grid(row=0,column=0)
@@ -47,14 +49,14 @@ class View(tk.Frame):
 
         self.reset_button = tk.Button(self.second_frame, text="Reset View", command=self.reset)
         self.reset_button.grid(row=4, column=0, columnspan=2, padx=10, pady=10,ipadx=50)        
-       
+
+        # Creating second Frame inside the canvas
+        self.third_frame = tk.Frame(self.my_canvas)
+
+        # Adding second Frame to a window in canvas
+        self.my_canvas.create_window((0,200), window=self.third_frame, anchor=NW)
+
         self.controller = None
-
-        
-
-        # for i in range(100):
-        #     tk.Button(self.second_frame, text=f'Button {i}!').grid(row=i, column=0)
-
 
         # self.canvas_on_View_frame.config(yscrollcommand= self.scroll.set)
         # self.canvas_on_View_frame.grid(row=0,column=0)
@@ -76,7 +78,31 @@ class View(tk.Frame):
         print('Resetted!')
 
     def receiving(self,movies):
+        # creating a frame inside third_frame w/ movie info on left & a movie-poster-containing-canvas on the right 
+        # remember that each frame will go ultimately on third_frame
+        
+        # what if I create a canvas inside of third_frame, that will contain all frames mentioned above
+        self.results_canvas = tk.Canvas(self.third_frame,bg='green')
+        self.results_canvas.pack(side=TOP, fill=BOTH, expand=1)
 
-        for row in range(len(movies)):
-            tk.Label(self.second_frame, text=movies[row][0]).grid(row=row, column=1)
-        pass
+        i=0
+        for movie in movies:
+            # Frame for each movie's info and poster
+            self.movie_frame = tk.Frame(self.results_canvas,border=5, borderwidth=5)
+
+            # label to show movie info
+            tk.Label(self.movie_frame,text = movie[0],bg='yellow').grid(row=i,column=0)
+
+            # create Photoimage 
+            self.poster = ImageTk.PhotoImage(Image.open(request.urlopen(movie[4])).resize((200,250)))
+            
+            # create Canvas to contain movie poster
+            self.poster_canvas = tk.Canvas(self.movie_frame, width=200, height=250)
+            self.poster_canvas.grid(row=i, column=1)
+            self.poster_canvas.create_image((100, i), image=self.poster)
+            self.results_canvas.create_window((0,i*25), window=self.movie_frame, anchor=NW)
+
+            i += 1
+        # for row in range(len(movies)):
+        #     tk.Label(self.third_frame, text=movies[row][0]).grid(row=row, column=0)
+        # pass
