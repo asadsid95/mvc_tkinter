@@ -82,25 +82,28 @@ class View(tk.Frame):
         # remember that each frame will go ultimately on third_frame
         
         # what if I create a canvas inside of third_frame, that will contain all frames mentioned above
-        self.results_canvas = tk.Canvas(self.third_frame,bg='green')
-        self.results_canvas.pack(side=TOP, fill=BOTH, expand=1)
+        self.results_canvas = tk.Canvas(self.third_frame,bg='green',height=1000)
+        self.results_canvas.pack(side=TOP, fill=BOTH)
 
         i=0
         for movie in movies:
             # Frame for each movie's info and poster
-            self.movie_frame = tk.Frame(self.results_canvas,border=5, borderwidth=5)
+            self.movie_frame = tk.Frame(self.results_canvas)
 
             # label to show movie info
             tk.Label(self.movie_frame,text = movie[0],bg='yellow').grid(row=i,column=0)
+            tk.Label(self.movie_frame,text = movie[1],bg='yellow').grid(row=i,column=1)
+            tk.Label(self.movie_frame,text = movie[2],bg='yellow').grid(row=i,column=2)
+            tk.Label(self.movie_frame,text = movie[3],bg='yellow').grid(row=i,column=3)
 
             # create Photoimage 
             self.poster = ImageTk.PhotoImage(Image.open(request.urlopen(movie[4])).resize((200,250)))
             
             # create Canvas to contain movie poster
-            self.poster_canvas = tk.Canvas(self.movie_frame, width=200, height=250)
-            self.poster_canvas.grid(row=i, column=1)
-            self.poster_canvas.create_image((100, i), image=self.poster)
-            self.results_canvas.create_window((0,i*25), window=self.movie_frame, anchor=NW)
+            self.poster_canvas = tk.Canvas(self.movie_frame, width=200, height=250,bg='pink')
+            self.poster_canvas.grid(row=i, column=4)
+            self.poster_canvas.create_image((1,1), image=self.poster, anchor=NW)
+            self.results_canvas.create_window((0,250*i), window=self.movie_frame, anchor=NW)
 
             i += 1
         # for row in range(len(movies)):

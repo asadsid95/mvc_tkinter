@@ -17,7 +17,6 @@ class MainApp(tk.Tk): # subclass of toplevel widget
         controller = Controller(ui_model,ui_view)
         ui_view.set_controller(controller)
 
-
     pass
 
 if __name__=="__main__":
